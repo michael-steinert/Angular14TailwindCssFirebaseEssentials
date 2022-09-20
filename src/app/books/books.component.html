@@ -1,0 +1,20 @@
+<p>Programming Book List</p>
+<button (click)="handleClick()" [disabled]="isDisabled">
+  <ng-container [ngSwitch]="isShowingBooks">
+    <ng-container *ngSwitchCase="false">Show Books</ng-container>
+    <ng-container *ngSwitchCase="true">Hide Books</ng-container>
+  </ng-container>
+</button>
+<input [(ngModel)]="inputName" type="text" />
+<input (input)="handleInput($event)" type="text" />
+<span>{{ inputName }}</span>
+<ul *ngIf="isShowingBooks" class="flex flex-wrap justify-center">
+  <ng-container *ngFor="let book of books; let i = index">
+    <app-book
+      (bookEventEmitter)="addToShoppingCart($event)"
+      [book]="book"
+      [index]="i"
+      class="w-1/2 p-5 text-center"
+    ></app-book>
+  </ng-container>
+</ul>
